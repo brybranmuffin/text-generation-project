@@ -16,9 +16,8 @@ echo "Starting job"
 set -euo pipefail
 
 echo "Setting project root"
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$SLURM_SUBMIT_DIR"
 cd "$PROJECT_ROOT"
-
 
 echo "Job ID:       $SLURM_JOB_ID"
 echo "Node:         $SLURMD_NODENAME"
@@ -28,12 +27,12 @@ echo "Start time:   $(date)"
 
 module purge all
 module load mamba/24.3.0
-# Activate conda environment
+
 PYTHON="conda run -n gen-ai-text python"
 
-echo "Python: $(which python)"
-echo "PyTorch: $(python -c 'import torch; print(torch.__version__)')"
-echo "CUDA available: $(python -c 'import torch; print(torch.cuda.is_available())')"
+echo "Python:         $($PYTHON -c 'import sys; print(sys.executable)')"
+echo "PyTorch:        $($PYTHON -c 'import torch; print(torch.__version__)')"
+echo "CUDA available: $($PYTHON -c 'import torch; print(torch.cuda.is_available())')"
 
 echo "=== Starting BERT training ==="
 $PYTHON models/BERT/bert.py
