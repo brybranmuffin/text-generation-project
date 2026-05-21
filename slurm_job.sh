@@ -1,16 +1,17 @@
 #!/bin/bash
 #SBATCH --job-name=congress-lm-training
-#SBATCH --partition=gpu           # change to your cluster's GPU partition
+#SBATCH --account=e32706
+#SBATCH --partition=gengpu
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:a100:1         # change GPU type to match your cluster
+#SBATCH --gres=gpu:a100:1 
 #SBATCH --mem=64G
 #SBATCH --time=24:00:00
 #SBATCH --output=outputs/logs/slurm_%j.out
 #SBATCH --error=outputs/logs/slurm_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH --mail-user=bryant.bettencourt.dev@gmail.com
+#SBATCH --mail-user=bettencourt@u.northwestern.edu
 
 set -euo pipefail
 
