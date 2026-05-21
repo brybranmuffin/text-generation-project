@@ -26,6 +26,8 @@ echo "GPUs:         $CUDA_VISIBLE_DEVICES"
 echo "Project root: $PROJECT_ROOT"
 echo "Start time:   $(date)"
 
+module purge all
+module load mamba/24.3.0
 # Activate conda environment
 PYTHON="conda run -n gen-ai-text python"
 
