@@ -12,9 +12,10 @@
 #SBATCH --error=outputs/logs/slurm_%j.err
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=bettencourt@u.northwestern.edu
-
+echo "Starting job"
 set -euo pipefail
 
+echo "Setting project root"
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_ROOT"
 
@@ -26,7 +27,6 @@ echo "Project root: $PROJECT_ROOT"
 echo "Start time:   $(date)"
 
 # Activate conda environment
-source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate gen-ai-text
 
 echo "Python: $(which python)"
