@@ -5,6 +5,7 @@ import math
 import os
 import random
 import time
+import csv
 
 import numpy as np
 import torch
@@ -54,6 +55,14 @@ def load_dataset_from_jsonl(data_dir: str) -> Dataset:
     logger.info("Loaded %d total records", len(records))
     return Dataset.from_list(records)
 
+def load_dataset_from_csv(csv_dir: str) -> Dataset:
+    records = []
+    with open(csv_dir, 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            records.append({'text': row[1]})
+    logger.info("Loaded %d total records", len(records))
+    return Dataset.from_list(records)
 
 def tokenize_batch(examples: dict, tokenizer: BertTokenizer, max_length: int) -> dict:
     return tokenizer(
@@ -73,8 +82,14 @@ def main() -> None:
 
     logger.info("=== BERT Training Configuration ===")
     CFG.log_config(logger)
-
-    raw_dataset = load_dataset_from_jsonl(CFG.data_dir)
+    
+    if CFG.data_type == "jsonl":
+        raw_dataset = load_dataset_from_jsonl(CFG.data_dir)
+    elif CFG.data_type == "csv":
+        raw_dataset = load_dataset_from_csv(CFG.data_dir)
+    else:
+        raise ValueError(f"Unsupported data type: {CFG.data_type}")
+    
     raw_dataset = raw_dataset.shuffle(seed=CFG.shuffle_seed)
     split = raw_dataset.train_test_split(test_size=CFG.eval_split, seed=CFG.shuffle_seed)
     train_dataset = split["train"]

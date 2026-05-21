@@ -4,10 +4,11 @@ import logging
 
 @dataclasses.dataclass(frozen=True)
 class BertTrainingConfig:
-    data_dir: str = "/data/speeches"
-    output_dir: str = "/models/bert"
-    final_dir: str = "/models/bert/final"
-    log_dir: str = "/models/bert/logs"
+    data_dir: str = "./data/raw_data/filtered_speeches.csv"
+    data_type: str = "csv" # jsonl or csv
+    output_dir: str = "./outputs/bert"
+    final_dir: str = "./outputs/bert/final"
+    log_dir: str = "./outputs/bert/logs"
 
     model_name: str = "bert-base-uncased"
 

@@ -4,10 +4,11 @@ import logging
 
 @dataclasses.dataclass(frozen=True)
 class GPT2TrainingConfig:
-    data_dir: str = "/data/speeches"
-    output_dir: str = "/models/gpt2"
-    final_dir: str = "/models/gpt2/final"
-    log_dir: str = "/models/gpt2/logs"
+    data_dir: str = "./data/raw_data/filtered_speeches.csv"
+    data_type: str = "csv" # csv or jsonl
+    output_dir: str = "./outputs/gpt2"
+    final_dir: str = "./outputs/gpt2/final"
+    log_dir: str = "./outputs/gpt2/logs"
 
     model_name: str = "gpt2-medium"
 
