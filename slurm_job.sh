@@ -27,18 +27,18 @@ echo "Project root: $PROJECT_ROOT"
 echo "Start time:   $(date)"
 
 # Activate conda environment
-conda activate gen-ai-text
+PYTHON="conda run -n gen-ai-text python"
 
 echo "Python: $(which python)"
 echo "PyTorch: $(python -c 'import torch; print(torch.__version__)')"
 echo "CUDA available: $(python -c 'import torch; print(torch.cuda.is_available())')"
 
 echo "=== Starting BERT training ==="
-python models/BERT/bert.py
+$PYTHON models/BERT/bert.py
 echo "=== BERT training complete ==="
 
 echo "=== Starting GPT-2 training ==="
-python models/GPT2/gpt2.py
+$PYTHON models/GPT2/gpt2.py
 echo "=== GPT-2 training complete ==="
 
 echo "End time: $(date)"
