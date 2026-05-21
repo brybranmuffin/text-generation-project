@@ -84,7 +84,7 @@ def main() -> None:
 
     logger.info("=== BERT Training Configuration ===")
     CFG.log_config(logger)
-    
+
     if CFG.data_type == "jsonl":
         raw_dataset = load_dataset_from_jsonl(CFG.data_dir)
     elif CFG.data_type == "csv":
@@ -116,7 +116,6 @@ def main() -> None:
 
     training_args = TrainingArguments(
         output_dir=CFG.output_dir,
-        overwrite_output_dir=False,
         num_train_epochs=CFG.num_train_epochs,
         per_device_train_batch_size=CFG.per_device_train_batch_size,
         per_device_eval_batch_size=CFG.per_device_eval_batch_size,
