@@ -18,7 +18,6 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_ROOT"
 
-mkdir -p outputs/logs
 
 echo "Job ID:       $SLURM_JOB_ID"
 echo "Node:         $SLURMD_NODENAME"
