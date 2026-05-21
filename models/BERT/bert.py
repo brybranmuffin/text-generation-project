@@ -6,6 +6,8 @@ import os
 import random
 import time
 import csv
+import sys
+csv.field_size_limit(sys.maxsize)
 
 import numpy as np
 import torch
