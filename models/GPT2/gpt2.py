@@ -130,10 +130,8 @@ def main() -> None:
         gradient_accumulation_steps=CFG.gradient_accumulation_steps,
         learning_rate=CFG.learning_rate,
         weight_decay=CFG.weight_decay,
-        warmup_ratio=CFG.warmup_ratio,
         lr_scheduler_type=CFG.lr_scheduler_type,
         fp16=CFG.fp16,
-        logging_dir=CFG.log_dir,
         logging_steps=CFG.logging_steps,
         save_steps=CFG.save_steps,
         eval_steps=CFG.eval_steps,
@@ -153,7 +151,7 @@ def main() -> None:
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         data_collator=data_collator,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
     )
 
     last_checkpoint = trainer_utils.get_last_checkpoint(CFG.output_dir)
