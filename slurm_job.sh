@@ -26,6 +26,7 @@ echo "Project root: $PROJECT_ROOT"
 echo "Start time:   $(date)"
 
 module purge all
+module load cuda/12.1.0-openmpi-4.1.4
 module load mamba/24.3.0
 
 PYTHON="conda run -n gen-ai-text python"

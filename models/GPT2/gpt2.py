@@ -11,7 +11,7 @@ csv.field_size_limit(sys.maxsize)
 
 import numpy as np
 import torch
-from datasets import Dataset
+from datasets import Dataset, load_dataset
 from transformers import (
     GPT2LMHeadModel,
     GPT2Model,
@@ -57,14 +57,11 @@ def load_dataset_from_jsonl(data_dir: str) -> Dataset:
     logger.info("Loaded %d total records", len(records))
     return Dataset.from_list(records)
 
-def load_dataset_from_csv(csv_dir: str) -> Dataset:
-    records = []
-    with open(csv_dir, 'r') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            records.append({'text': row[1]})
-    logger.info("Loaded %d total records", len(records))
-    return Dataset.from_list(records)
+def load_dataset_from_csv(csv_path: str) -> Dataset:
+    dataset = load_dataset("csv", data_files=csv_path, split="train")
+    dataset = dataset.select_columns(["text"])
+    logger.info("Loaded %d total records", len(dataset))
+    return dataset
     
 
 
