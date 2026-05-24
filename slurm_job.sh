@@ -29,6 +29,9 @@ module purge all
 module load cuda/12.6.2-gcc-12.4.0
 module load mamba/24.3.0
 
+export HF_HOME="/scratch/rsr7518/.cache/huggingface"
+export HF_DATASETS_CACHE="/scratch/rsr7518/.cache/huggingface/datasets"
+
 PYTHON="conda run -n gen-ai-text python"
 
 echo "Python:         $($PYTHON -c 'import sys; print(sys.executable)')"
