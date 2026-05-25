@@ -18,10 +18,10 @@ class GPT2TrainingConfig:
     eval_split: float = 0.01
     shuffle_seed: int = 42
 
-    num_train_epochs: int = 3
-    per_device_train_batch_size: int = 8
-    per_device_eval_batch_size: int = 16
-    gradient_accumulation_steps: int = 8
+    num_train_epochs: int = 1
+    per_device_train_batch_size: int = 16
+    per_device_eval_batch_size: int = 32
+    gradient_accumulation_steps: int = 4
     learning_rate: float = 5e-5
     weight_decay: float = 0.1
     warmup_ratio: float = 0.05
